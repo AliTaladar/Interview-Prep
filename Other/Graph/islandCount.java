@@ -38,21 +38,29 @@ public class main {
     private static void exploreIsland(char[][] grid, boolean[][] visited, int i, int j) {
         Queue<Integer[]> queue = new LinkedList<>();
         queue.add(new Integer[]{i, j});
+        visited[i][j] = true;
 
         while (!queue.isEmpty()) {
             Integer[] current = queue.poll();
             i = current[0];
             j = current[1];
-            visited[i][j] = true;
 
-            if (i > 0 && !visited[i - 1][j] && grid[i - 1][j] == 'L')
+            if (i > 0 && !visited[i - 1][j] && grid[i - 1][j] == 'L') {
                 queue.add(new Integer[]{i - 1, j});
-            if (i < grid.length - 1 && !visited[i + 1][j] && grid[i + 1][j] == 'L')
+                visited[i - 1][j] = true;
+            }
+            if (i < grid.length - 1 && !visited[i + 1][j] && grid[i + 1][j] == 'L') {
                 queue.add(new Integer[]{i + 1, j});
-            if (j > 0 && !visited[i][j - 1] && grid[i][j - 1] == 'L')
+                visited[i + 1][j] = true;
+            }
+            if (j > 0 && !visited[i][j - 1] && grid[i][j - 1] == 'L') {
                 queue.add(new Integer[]{i, j - 1});
-            if (j < grid[i].length - 1 && !visited[i][j + 1] && grid[i][j + 1] == 'L')
+                visited[i][j - 1] = true;
+            }
+            if (j < grid[i].length - 1 && !visited[i][j + 1] && grid[i][j + 1] == 'L') {
                 queue.add(new Integer[]{i, j + 1});
+                visited[i][j + 1] = true;
+            }
         }
     }
 
